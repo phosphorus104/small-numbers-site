@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to keep a rent roll in a spreadsheet and see who is behind | Small Numbers</title><meta name="description" content="A bank statement tells you what came in. It does not tell you what should have come in, and that gap is the number a landlord needs. A rent roll lines…"><link rel="canonical" href="https://phosphorus104.github.io/small-numbers-site/guides/how-to-keep-a-rent-roll-in-a-spreadsheet-and-see-who-is-behind.html">
+<style>
+:root{--ink:#1B2432;--paper:#F5F1EA;--signal:#B85F1E;--mint:#2A9D8F;--mute:#5E636B;--card:#FFFFFF;--line:#E2DCD1}
+@media (prefers-color-scheme:dark){:root{--ink:#EDE8DF;--paper:#151B25;--signal:#E99A5C;--mint:#5CC2B5;--mute:#9AA0A8;--card:#1F2733;--line:#2E3846}}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 Arial,Helvetica,sans-serif}
+.wrap{max-width:820px;margin:0 auto;padding:24px 16px 48px}
+header.site{border-bottom:1px solid var(--line);margin-bottom:24px;padding-bottom:12px;display:flex;flex-wrap:wrap;gap:8px 18px;align-items:baseline}
+header.site a.brand{font-weight:700;font-size:20px;color:var(--ink);text-decoration:none}
+header.site nav a{color:var(--mute);margin-right:14px;font-size:15px}
+a{color:var(--signal)}h1{font-size:28px;line-height:1.25;margin:0 0 10px}h2{font-size:20px;margin:30px 0 8px}
+.lead{font-size:19px;color:var(--mute)}.price{font-weight:700;color:var(--mint)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px 16px;margin:10px 0}
+.card h3{margin:0 0 4px;font-size:17px}.card p{margin:4px 0;font-size:15px}
+.btn{display:inline-block;background:var(--signal);color:#fff;padding:10px 16px;border-radius:5px;text-decoration:none;font-weight:700}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;font-size:14px;white-space:pre-wrap;word-break:break-word}
+code{font-family:Consolas,Menlo,monospace}
+.small{font-size:14px;color:var(--mute)}footer{border-top:1px solid var(--line);margin-top:40px;padding-top:12px;font-size:14px;color:var(--mute)}
+</style></head><body><div class="wrap">
+<header class="site"><a class="brand" href="../index.html">Small Numbers</a><nav><a href="../index.html#products">Products</a><a href="../index.html#guides">How-to guides</a><a href="https://smallnumbers.gumroad.com">Store</a></nav></header>
+<p class="small"><a href="../index.html#guides">How-to guides</a></p>
+<h1>How to keep a rent roll in a spreadsheet and see who is behind</h1>
+<p>A bank statement tells you what came in. It does not tell you what should have come in, and that gap is the number a landlord needs. A rent roll lines up rent due against rent received, unit by unit and month by month. Here is how to build one.</p>
+<h2>The inputs</h2>
+<p>A Leases table, one row per lease (a renewal at a new rent is a new row, so old months keep the old rent):</p>
+<ul>
+<li>A: Unit</li>
+<li>B: Tenant</li>
+<li>C: Start date</li>
+<li>D: End date (blank for month-to-month)</li>
+<li>E: Monthly rent</li>
+<li>F: Deposit held</li>
+</ul>
+<p>A Payments table, one row per payment: date paid, unit, rent month (the first of the month the money is for) and amount.</p>
+<h2>The formulas</h2>
+<p>On a Rent roll tab, put units down column A and the first of each month across row 1. Rent received for a unit and month:</p>
+<pre><code>=SUMIFS(Payments!D:D,Payments!B:B,$A2,Payments!C:C,B$1)</code></pre>
+<p>Rent due is the lease's rent for every month the lease covers. A first month that starts mid-month is usually prorated:</p>
+<pre><code>=E2*(EOMONTH(C2,0)-C2+1)/DAY(EOMONTH(C2,0))</code></pre>
+<p>Behind = due to date minus received. And to see leases ending soon, with the report date in M1:</p>
+<pre><code>=IF(AND(D2&lt;&gt;&quot;&quot;,D2&gt;=$M$1,D2&lt;=$M$1+60),&quot;Ends within 60 days&quot;,&quot;&quot;)</code></pre>
+<h2>A worked example</h2>
+<p>Report date 15 Oct, rent due on the 1st, roll starting in July.</p>
+<ul>
+<li>Unit 1, 1,200 a month, lease 1 Dec to 30 Nov. Paid 1,200 for July, August and October, 700 for September. Due July to October 4,800, received 4,300: 500 behind, all of it September. Lease ends within 60 days.</li>
+<li>Unit 2, 950 a month, month-to-month from 15 Aug. August is 17 of 31 days: 950 × 17 ÷ 31 = 520.97. Paid August and September, nothing yet for October. Due 2,420.97, received 1,470.97: 950 behind.</li>
+</ul>
+<p>Total behind: 1,450. Unit 1 needs a renewal talk and a reminder about September; Unit 2 needs a reminder this week.</p>
+<h2>Mistakes that skew the roll</h2>
+<ul>
+<li>Logging payments by the date paid instead of the rent month. A late September payment made in October then looks like October rent, and September looks unpaid forever.</li>
+<li>Entering a deposit as rent. Keep deposits on the lease row; they are money you hold, not income.</li>
+<li>Typing the new rent over the old one at renewal, which rewrites months already collected.</li>
+<li>Counting a tenant change twice. When one lease ends and another starts in the same month, decide which lease owns that month.</li>
+</ul>
+<h2>Get it ready-made</h2>
+<p>The free Rent Tracker Lite does the rent roll, unpaid rent, leases to act on and net for the year for one property with up to five units, in Excel or Google Sheets: <a href="https://smallnumbers.gumroad.com/l/free-rent-tracker">Free Rent Tracker for Small Landlords</a></p>
+<p>The Rental Property Tracker covers up to ten properties, deposits held and kept, and net by property: <a href="https://smallnumbers.gumroad.com/l/rental-property-tracker">Rental Property Tracker</a></p>
+<footer>Small Numbers: plain tools for one-person businesses. Every product is sold and delivered through the <a href="https://smallnumbers.gumroad.com">Small Numbers store on Gumroad</a>.</footer>
+</div></body></html>

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to build an invoice ageing report in a spreadsheet (and see who pays late) | Small Numbers</title><meta name="description" content="Total unpaid tells you very little. An invoice that went out last week and one that is three months overdue are different problems. An ageing report…"><link rel="canonical" href="https://phosphorus104.github.io/small-numbers-site/guides/how-to-build-an-invoice-ageing-report-in-a-spreadsheet-and-see-who-pays-late.html">
+<style>
+:root{--ink:#1B2432;--paper:#F5F1EA;--signal:#B85F1E;--mint:#2A9D8F;--mute:#5E636B;--card:#FFFFFF;--line:#E2DCD1}
+@media (prefers-color-scheme:dark){:root{--ink:#EDE8DF;--paper:#151B25;--signal:#E99A5C;--mint:#5CC2B5;--mute:#9AA0A8;--card:#1F2733;--line:#2E3846}}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 Arial,Helvetica,sans-serif}
+.wrap{max-width:820px;margin:0 auto;padding:24px 16px 48px}
+header.site{border-bottom:1px solid var(--line);margin-bottom:24px;padding-bottom:12px;display:flex;flex-wrap:wrap;gap:8px 18px;align-items:baseline}
+header.site a.brand{font-weight:700;font-size:20px;color:var(--ink);text-decoration:none}
+header.site nav a{color:var(--mute);margin-right:14px;font-size:15px}
+a{color:var(--signal)}h1{font-size:28px;line-height:1.25;margin:0 0 10px}h2{font-size:20px;margin:30px 0 8px}
+.lead{font-size:19px;color:var(--mute)}.price{font-weight:700;color:var(--mint)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px 16px;margin:10px 0}
+.card h3{margin:0 0 4px;font-size:17px}.card p{margin:4px 0;font-size:15px}
+.btn{display:inline-block;background:var(--signal);color:#fff;padding:10px 16px;border-radius:5px;text-decoration:none;font-weight:700}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;font-size:14px;white-space:pre-wrap;word-break:break-word}
+code{font-family:Consolas,Menlo,monospace}
+.small{font-size:14px;color:var(--mute)}footer{border-top:1px solid var(--line);margin-top:40px;padding-top:12px;font-size:14px;color:var(--mute)}
+</style></head><body><div class="wrap">
+<header class="site"><a class="brand" href="../index.html">Small Numbers</a><nav><a href="../index.html#products">Products</a><a href="../index.html#guides">How-to guides</a><a href="https://smallnumbers.gumroad.com">Store</a></nav></header>
+<p class="small"><a href="../index.html#guides">How-to guides</a></p>
+<h1>How to build an invoice ageing report in a spreadsheet (and see who pays late)</h1>
+<p>Total unpaid tells you very little. An invoice that went out last week and one that is three months overdue are different problems. An ageing report sorts what you are owed by how late it is, so you know who to chase first. Here is how to set one up.</p>
+<h2>The inputs</h2>
+<p>One row per invoice:</p>
+<ul>
+<li>A: Invoice number</li>
+<li>B: Client</li>
+<li>C: Invoice date</li>
+<li>D: Payment terms in days (14, 30, 45)</li>
+<li>E: Amount</li>
+<li>F: Amount paid so far</li>
+<li>G: Date of the last payment</li>
+</ul>
+<p>Put the report date in one cell, say M1. Using a fixed date instead of TODAY() means a report you saved last month still shows what it showed then.</p>
+<h2>The formulas</h2>
+<ul>
+<li>Due date, H: =C2+D2</li>
+<li>Balance, I: =E2-F2</li>
+<li>Days overdue, J: =IF(I2&lt;=0,0,MAX(0,$M$1-H2))</li>
+<li>Bucket, K: =IF(I2&lt;=0,"Paid",IF(J2=0,"Not due",IF(J2&lt;=30,"1-30",IF(J2&lt;=60,"31-60",IF(J2&lt;=90,"61-90","90+")))))</li>
+</ul>
+<p>Then a small summary table, one row per bucket: =SUMIFS(I:I,K:K,"1-30") and so on. Add a client column to the summary with SUMIFS on B as well, and you can see which client holds most of the late money.</p>
+<h2>A worked example</h2>
+<p>Report date 31 Oct.</p>
+<ul>
+<li>INV-101, Client A, sent 1 Sep, 30-day terms, 2,000, nothing paid. Due 1 Oct, 30 days overdue: 1-30 bucket.</li>
+<li>INV-102, Client B, sent 15 Aug, 14-day terms, 1,500, 500 paid. Due 29 Aug, 63 days overdue, balance 1,000: 61-90 bucket.</li>
+<li>INV-103, Client A, sent 20 Oct, 30-day terms, 800. Due 19 Nov: not due yet.</li>
+</ul>
+<p>You are owed 3,800, but only 3,000 of it is overdue, and the oldest 1,000 sits with Client B. That is the first email to send.</p>
+<h2>Mistakes that skew the report</h2>
+<ul>
+<li>Counting from the invoice date instead of the due date. A 30-day invoice is not late on day 20.</li>
+<li>Ignoring part payments. Age the balance, not the original amount, or a client who paid most of it looks as bad as one who paid nothing.</li>
+<li>Deleting paid invoices. Keep them, marked Paid; they tell you how long each client usually takes. For paid rows, =G2-C2 is the days to pay, and AVERAGEIFS by client gives each client's habit.</li>
+<li>Leaving credit notes out. Enter them as a payment on the invoice they reduce, so the balance is right.</li>
+</ul>
+<h2>Get it ready-made</h2>
+<p>The free Invoice Tracker Lite does the ageing buckets, late clients and who-owes-you list for you, in Excel or Google Sheets: <a href="https://smallnumbers.gumroad.com/l/free-invoice-tracker-lite">Free Invoice Tracker for Freelancers</a></p>
+<p>Freelancer Finance OS adds tax set-aside and how many months your cash lasts: <a href="https://smallnumbers.gumroad.com/l/freelancer-finance-os">Freelancer Finance OS</a></p>
+<footer>Small Numbers: plain tools for one-person businesses. Every product is sold and delivered through the <a href="https://smallnumbers.gumroad.com">Small Numbers store on Gumroad</a>.</footer>
+</div></body></html>

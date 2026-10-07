@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>接案請款怎麼追：月結到期日、逾期天數與帳齡，用試算表一次看清楚 | Small Numbers</title><meta name="description" content="接案最累的往往不是做案子，而是收錢：哪張請款單已經到期？「月結 30 天」到底是哪一天？客戶匯進來的金額少了一截，是代扣還是少付？這些只要一張請款記錄表加幾個公"><link rel="canonical" href="https://phosphorus104.github.io/small-numbers-site/guides/freelancer-invoice-due-dates-and-ageing-tw.html">
+<style>
+:root{--ink:#1B2432;--paper:#F5F1EA;--signal:#B85F1E;--mint:#2A9D8F;--mute:#5E636B;--card:#FFFFFF;--line:#E2DCD1}
+@media (prefers-color-scheme:dark){:root{--ink:#EDE8DF;--paper:#151B25;--signal:#E99A5C;--mint:#5CC2B5;--mute:#9AA0A8;--card:#1F2733;--line:#2E3846}}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 Arial,Helvetica,sans-serif}
+.wrap{max-width:820px;margin:0 auto;padding:24px 16px 48px}
+header.site{border-bottom:1px solid var(--line);margin-bottom:24px;padding-bottom:12px;display:flex;flex-wrap:wrap;gap:8px 18px;align-items:baseline}
+header.site a.brand{font-weight:700;font-size:20px;color:var(--ink);text-decoration:none}
+header.site nav a{color:var(--mute);margin-right:14px;font-size:15px}
+a{color:var(--signal)}h1{font-size:28px;line-height:1.25;margin:0 0 10px}h2{font-size:20px;margin:30px 0 8px}
+.lead{font-size:19px;color:var(--mute)}.price{font-weight:700;color:var(--mint)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px 16px;margin:10px 0}
+.card h3{margin:0 0 4px;font-size:17px}.card p{margin:4px 0;font-size:15px}
+.btn{display:inline-block;background:var(--signal);color:#fff;padding:10px 16px;border-radius:5px;text-decoration:none;font-weight:700}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;font-size:14px;white-space:pre-wrap;word-break:break-word}
+code{font-family:Consolas,Menlo,monospace}
+.small{font-size:14px;color:var(--mute)}footer{border-top:1px solid var(--line);margin-top:40px;padding-top:12px;font-size:14px;color:var(--mute)}
+</style></head><body><div class="wrap">
+<header class="site"><a class="brand" href="../index.html">Small Numbers</a><nav><a href="../index.html#products">Products</a><a href="../index.html#guides">How-to guides</a><a href="https://smallnumbers.gumroad.com">Store</a></nav></header>
+<p class="small"><a href="../index.html#guides">How-to guides</a></p>
+<h1>接案請款怎麼追：月結到期日、逾期天數與帳齡，用試算表一次看清楚</h1>
+<p>接案最累的往往不是做案子，而是收錢：哪張請款單已經到期？「月結 30 天」到底是哪一天？客戶匯進來的金額少了一截，是代扣還是少付？這些只要一張請款記錄表加幾個公式，就能每週兩分鐘看完。</p>
+<h2>一、每張請款單記一列</h2>
+<p>欄位：客戶、單號、請款日、請款金額、付款天數、起算方式（月結或請款日起算）、代扣、折讓、已收金額、已收日。代扣金額照扣繳憑單或匯款明細上的數字填，不要自己估。</p>
+<h2>二、到期日：月結和請款日起算不一樣</h2>
+<ul>
+<li>請款日起算 30 天：到期日 = 請款日 + 30。</li>
+<li>月結 30 天：通常指請款當月結帳、次月底付款，到期日 = EOMONTH(請款日, 1)。月結 60 天就是 EOMONTH(請款日, 2)。</li>
+</ul>
+<p>同樣 8 月 20 日開的請款單，請款日起算 30 天是 9 月 19 日到期，月結 30 天是 9 月 30 日到期。把兩種混在一起算，逾期名單就會不準。</p>
+<h2>三、應收淨額、未收與逾期天數</h2>
+<ul>
+<li>應收淨額 = 請款金額 − 代扣 − 折讓</li>
+<li>未收 = 應收淨額 − 已收金額。只收到一部分時，差額留在未收，不要整筆標成已收。</li>
+<li>逾期天數 = 今天 − 到期日（還有未收、且已過到期日才算）</li>
+</ul>
+<p>帳齡再依逾期天數分成：未到期、1–30 天、31–60 天、61–90 天、90 天以上。</p>
+<h2>四、算一次範例</h2>
+<p>今天是 10 月 7 日，手上有三張未結清的請款單：</p>
+<ul>
+<li>A 客戶：8 月 20 日請款 30,000 元，月結 30 天，到期 9 月 30 日，還沒收到，逾期 7 天，落在 1–30 天。</li>
+<li>B 客戶：7 月 10 日請款 45,000 元，請款日起算 30 天，到期 8 月 9 日。扣繳憑單上代扣 4,500 元，應收淨額 40,500 元；9 月只匯進 20,000 元，未收 20,500 元，狀態是部分收款，逾期 59 天，落在 31–60 天。</li>
+<li>C 客戶：9 月 25 日請款 20,000 元，月結 30 天，到期 10 月 31 日，未到期。</li>
+</ul>
+<p>合計未收 70,500 元，其中逾期 50,500 元。這週該先追的是 B：金額最大、拖得最久，而且是部分收款，最容易被忘記。</p>
+<h2>五、用客戶別看誰常拖款</h2>
+<p>在客戶表用 AVERAGEIFS 算每位客戶的平均收款天數（已收日 − 請款日），再加總每位客戶的未收金額。一個平均要 70 天才付款的客戶，報價時就值得把付款條件寫清楚，或先收訂金。</p>
+<h2>不想自己做？</h2>
+<p><a href="https://smallnumbers.gumroad.com/l/freelancer-invoice-tracker-tw">自由工作者記帳與請款表</a>（NT$390）就是照這個方法做好的 Excel／Google 試算表：月結與請款日起算的到期日、代扣與折讓、部分收款、帳齡、各客戶平均收款天數，加上支出、依你設定比例的預留金額與現金可撐月數，附一間一人設計工作室的範例資料與五步驟說明。只做記錄、加總與提醒，不含稅務計算。</p>
+<p>出租房子也想這樣管？看看<a href="https://smallnumbers.gumroad.com/l/landlord-rent-tracker-tw">房東收租管理表</a>。</p>
+<footer>Small Numbers: plain tools for one-person businesses. Every product is sold and delivered through the <a href="https://smallnumbers.gumroad.com">Small Numbers store on Gumroad</a>.</footer>
+</div></body></html>

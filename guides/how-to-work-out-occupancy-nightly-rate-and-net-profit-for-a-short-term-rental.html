@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to work out occupancy, nightly rate and net profit for a short-term rental | Small Numbers</title><meta name="description" content="Platform dashboards show bookings and payouts, but not the three numbers that tell you whether a listing is worth the work: occupancy, average nightly…"><link rel="canonical" href="https://phosphorus104.github.io/small-numbers-site/guides/how-to-work-out-occupancy-nightly-rate-and-net-profit-for-a-short-term-rental.html">
+<style>
+:root{--ink:#1B2432;--paper:#F5F1EA;--signal:#B85F1E;--mint:#2A9D8F;--mute:#5E636B;--card:#FFFFFF;--line:#E2DCD1}
+@media (prefers-color-scheme:dark){:root{--ink:#EDE8DF;--paper:#151B25;--signal:#E99A5C;--mint:#5CC2B5;--mute:#9AA0A8;--card:#1F2733;--line:#2E3846}}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 Arial,Helvetica,sans-serif}
+.wrap{max-width:820px;margin:0 auto;padding:24px 16px 48px}
+header.site{border-bottom:1px solid var(--line);margin-bottom:24px;padding-bottom:12px;display:flex;flex-wrap:wrap;gap:8px 18px;align-items:baseline}
+header.site a.brand{font-weight:700;font-size:20px;color:var(--ink);text-decoration:none}
+header.site nav a{color:var(--mute);margin-right:14px;font-size:15px}
+a{color:var(--signal)}h1{font-size:28px;line-height:1.25;margin:0 0 10px}h2{font-size:20px;margin:30px 0 8px}
+.lead{font-size:19px;color:var(--mute)}.price{font-weight:700;color:var(--mint)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px 16px;margin:10px 0}
+.card h3{margin:0 0 4px;font-size:17px}.card p{margin:4px 0;font-size:15px}
+.btn{display:inline-block;background:var(--signal);color:#fff;padding:10px 16px;border-radius:5px;text-decoration:none;font-weight:700}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;font-size:14px;white-space:pre-wrap;word-break:break-word}
+code{font-family:Consolas,Menlo,monospace}
+.small{font-size:14px;color:var(--mute)}footer{border-top:1px solid var(--line);margin-top:40px;padding-top:12px;font-size:14px;color:var(--mute)}
+</style></head><body><div class="wrap">
+<header class="site"><a class="brand" href="../index.html">Small Numbers</a><nav><a href="../index.html#products">Products</a><a href="../index.html#guides">How-to guides</a><a href="https://smallnumbers.gumroad.com">Store</a></nav></header>
+<p class="small"><a href="../index.html#guides">How-to guides</a></p>
+<h1>How to work out occupancy, nightly rate and net profit for a short-term rental</h1>
+<p>Platform dashboards show bookings and payouts, but not the three numbers that tell you whether a listing is worth the work: occupancy, average nightly rate and what you actually keep. Here is how to get them from a plain spreadsheet.</p>
+<h2>The inputs</h2>
+<p>One row per stay:</p>
+<ul>
+<li>A: Listing</li>
+<li>B: Check-in date</li>
+<li>C: Check-out date</li>
+<li>D: Room revenue for the whole stay (nightly price times nights, before cleaning fees)</li>
+<li>E: Payout received</li>
+</ul>
+<p>And a short costs table: date, listing, category (cleaning, supplies, utilities, repairs), amount.</p>
+<p>Nights are check-out minus check-in: =C2-B2. A guest arriving on the 1st and leaving on the 4th stayed three nights; the check-out day is not a night.</p>
+<h2>Splitting stays across months</h2>
+<p>A stay from 28 Sep to 3 Oct belongs to two months. For a month that starts in cell H1 and ends in H2, the nights that fall inside it are:</p>
+<pre><code>=MAX(0,MIN(C2,H2+1)-MAX(B2,H1))</code></pre>
+<p>That gives 3 nights in September and 2 in October for the stay above. Sum the column for the month to get booked nights, and spread room revenue the same way: =D2*(nights in month)/(C2-B2).</p>
+<h2>The three numbers</h2>
+<ul>
+<li>Occupancy: booked nights ÷ available nights. Available nights are the days in the month minus nights you blocked for yourself or for repairs.</li>
+<li>Average nightly rate: room revenue for the month ÷ booked nights.</li>
+<li>Net: payouts received minus costs for the month.</li>
+</ul>
+<h2>A worked month</h2>
+<p>October has 31 nights. You blocked 3 for a family visit, so 28 were available. Guests stayed 19 nights, with 2,470 of room revenue. Payouts came to 2,310 after platform fees, and costs were 670 (cleaning 420, supplies 90, utilities 160).</p>
+<ul>
+<li>Occupancy: 19 ÷ 28 = 68%</li>
+<li>Average nightly rate: 2,470 ÷ 19 = 130</li>
+<li>Net: 2,310 − 670 = 1,640</li>
+</ul>
+<h2>Mistakes that skew the numbers</h2>
+<ul>
+<li>Counting the check-out day as a night, which inflates occupancy.</li>
+<li>Counting your own blocked nights as booked, or leaving them in the available nights.</li>
+<li>Putting a whole stay in the month it started. Long stays across a month end make one month look great and the next look empty.</li>
+<li>Using room revenue as income. What lands in your bank is the payout; check each one against the booking so a short or missing payout does not slip past.</li>
+</ul>
+<h2>Get it ready-made</h2>
+<p>The free Airbnb Host Calculator does the night split, occupancy, nightly rate and net for one listing, in Excel or Google Sheets: <a href="https://smallnumbers.gumroad.com/l/free-airbnb-host-calculator">Free Airbnb Host Calculator</a></p>
+<p>The Airbnb Host Spreadsheet covers up to five listings, payout checks and a turnover checklist: <a href="https://smallnumbers.gumroad.com/l/airbnb-host-spreadsheet">Airbnb Host Spreadsheet</a></p>
+<p>Not affiliated with Airbnb.</p>
+<footer>Small Numbers: plain tools for one-person businesses. Every product is sold and delivered through the <a href="https://smallnumbers.gumroad.com">Small Numbers store on Gumroad</a>.</footer>
+</div></body></html>

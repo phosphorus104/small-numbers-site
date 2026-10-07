@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>用試算表核對每月租金：誰還沒繳、欠多少、從哪個月開始 | Small Numbers</title><meta name="description" content="有幾間房在出租，最常見的麻煩不是收不到租，而是「不確定」：這個月 3F 到底繳了沒？上個月那筆 8,000 是補哪個月的？翻 LINE 和存摺對帳，一次就要半小"><link rel="canonical" href="https://phosphorus104.github.io/small-numbers-site/guides/monthly-rent-check-spreadsheet-tw.html">
+<style>
+:root{--ink:#1B2432;--paper:#F5F1EA;--signal:#B85F1E;--mint:#2A9D8F;--mute:#5E636B;--card:#FFFFFF;--line:#E2DCD1}
+@media (prefers-color-scheme:dark){:root{--ink:#EDE8DF;--paper:#151B25;--signal:#E99A5C;--mint:#5CC2B5;--mute:#9AA0A8;--card:#1F2733;--line:#2E3846}}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 Arial,Helvetica,sans-serif}
+.wrap{max-width:820px;margin:0 auto;padding:24px 16px 48px}
+header.site{border-bottom:1px solid var(--line);margin-bottom:24px;padding-bottom:12px;display:flex;flex-wrap:wrap;gap:8px 18px;align-items:baseline}
+header.site a.brand{font-weight:700;font-size:20px;color:var(--ink);text-decoration:none}
+header.site nav a{color:var(--mute);margin-right:14px;font-size:15px}
+a{color:var(--signal)}h1{font-size:28px;line-height:1.25;margin:0 0 10px}h2{font-size:20px;margin:30px 0 8px}
+.lead{font-size:19px;color:var(--mute)}.price{font-weight:700;color:var(--mint)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px 16px;margin:10px 0}
+.card h3{margin:0 0 4px;font-size:17px}.card p{margin:4px 0;font-size:15px}
+.btn{display:inline-block;background:var(--signal);color:#fff;padding:10px 16px;border-radius:5px;text-decoration:none;font-weight:700}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;font-size:14px;white-space:pre-wrap;word-break:break-word}
+code{font-family:Consolas,Menlo,monospace}
+.small{font-size:14px;color:var(--mute)}footer{border-top:1px solid var(--line);margin-top:40px;padding-top:12px;font-size:14px;color:var(--mute)}
+</style></head><body><div class="wrap">
+<header class="site"><a class="brand" href="../index.html">Small Numbers</a><nav><a href="../index.html#products">Products</a><a href="../index.html#guides">How-to guides</a><a href="https://smallnumbers.gumroad.com">Store</a></nav></header>
+<p class="small"><a href="../index.html#guides">How-to guides</a></p>
+<h1>用試算表核對每月租金：誰還沒繳、欠多少、從哪個月開始</h1>
+<p>有幾間房在出租，最常見的麻煩不是收不到租，而是「不確定」：這個月 3F 到底繳了沒？上個月那筆 8,000 是補哪個月的？翻 LINE 和存摺對帳，一次就要半小時。</p>
+<p>其實只要三張表、兩個公式，每個月兩分鐘就能對完。</p>
+<h2>一、三張表各記什麼</h2>
+<ul>
+<li>合約：一份合約一列。房號、月租、繳租日、起租日、結束日、首月租金。續約、調租、換房客都新增一列，不要改舊的那列。</li>
+<li>租金紀錄：收到錢就記一列：收款日、房號、金額，以及「所屬月份」，也就是這筆錢是付哪個月的。補繳上個月的租金，所屬月份就填上個月。</li>
+<li>每月核對：每間房一列、每個月一欄，用公式算出應收與實收。</li>
+</ul>
+<h2>二、每一格的兩個數字</h2>
+<p>實收 = SUMIFS(租金紀錄!金額, 租金紀錄!房號, 房號, 租金紀錄!所屬月份, 該月)。一個月分兩次付也沒關係，SUMIFS 會自動加總。</p>
+<p>應收要看合約：</p>
+<ul>
+<li>該月在起租月之前，或在房客實際搬走之後：0</li>
+<li>該月就是起租月：首月租金（例如 15 日入住，只收半個月）</li>
+<li>其他月份：月租。合約到期但房客還住著，就照月租繼續算，直到填上實際搬走的日期。</li>
+</ul>
+<p>還沒過「繳租日＋寬限天數」的月份，先不算欠租。</p>
+<h2>三、算一次範例</h2>
+<p>3F 套房月租 12,000 元，每月 5 日繳，寬限 3 天。房客 3 月 15 日入住，首月收半個月 6,000 元。收款紀錄：3 月 6,000、4 月 12,000、5 月 12,000、6 月只收到 8,000、7 月還沒收到。今天是 7 月 10 日，已經過了 7 月的 5 日加 3 天寬限。</p>
+<ul>
+<li>到目前應收：6,000 + 12,000 × 4 = 54,000 元</li>
+<li>實收：6,000 + 12,000 + 12,000 + 8,000 = 38,000 元</li>
+<li>欠租：16,000 元。最早未繳清的是 6 月（差 4,000），7 月整月 12,000 未繳。</li>
+</ul>
+<p>如果在 7 月 8 日寬限期結束以前打開表格，7 月還在繳租期限內，欠租只會顯示 6 月的 4,000。</p>
+<h2>四、上色，一眼看完</h2>
+<p>在每月核對加上條件式格式：實收大於等於應收是綠色；有收但不足是橘色；過了繳租日加寬限仍是 0 是紅色；還沒到期就先收到（預繳）是藍色。每個月只要看紅色和橘色的格子。</p>
+<h2>五、續約調租，不要改舊的那列</h2>
+<p>3F 9 月續約、月租調為 12,500 元：把舊合約的實際結束日填 8 月 31 日，再新增一列 9 月 1 日起、月租 12,500 的合約。3 到 8 月仍照 12,000 計算，過去的對帳結果不會變。如果直接把舊列改成 12,500，4 月起的每一格都會變成欠 500（3 月是首月租金，另外記）。</p>
+<p>押金也記在合約那一列：收了多少、退了多少、扣了多少，相減就是目前還押著的金額。</p>
+<h2>不想自己做？</h2>
+<p><a href="https://smallnumbers.gumroad.com/l/landlord-rent-tracker-tw">房東收租管理表</a>（NT$390）就是照這個方法做好的 Excel／Google 試算表：每間房 × 12 個月的每月核對、欠租清單、押金、即將到期的合約、支出與淨收入，附一棟 6 間房的範例資料與五步驟說明。只做記錄、加總與提醒，不含稅務計算。</p>
+<p>接案收入也想這樣管？看看<a href="https://smallnumbers.gumroad.com/l/freelancer-invoice-tracker-tw">自由工作者記帳與請款表</a>。</p>
+<footer>Small Numbers: plain tools for one-person businesses. Every product is sold and delivered through the <a href="https://smallnumbers.gumroad.com">Small Numbers store on Gumroad</a>.</footer>
+</div></body></html>

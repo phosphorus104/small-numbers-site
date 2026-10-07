@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to work out revenue per 1,000 subscribers and a sent-weighted open rate for your newsletter | Small Numbers</title><meta name="description" content="Two numbers tell you more about a newsletter than a raw subscriber count: how much each month earns for every 1,000 people on your list, and what share…"><link rel="canonical" href="https://phosphorus104.github.io/small-numbers-site/guides/how-to-work-out-revenue-per-1000-subscribers-and-a-sent-weighted-open-rate.html">
+<style>
+:root{--ink:#1B2432;--paper:#F5F1EA;--signal:#B85F1E;--mint:#2A9D8F;--mute:#5E636B;--card:#FFFFFF;--line:#E2DCD1}
+@media (prefers-color-scheme:dark){:root{--ink:#EDE8DF;--paper:#151B25;--signal:#E99A5C;--mint:#5CC2B5;--mute:#9AA0A8;--card:#1F2733;--line:#2E3846}}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 Arial,Helvetica,sans-serif}
+.wrap{max-width:820px;margin:0 auto;padding:24px 16px 48px}
+header.site{border-bottom:1px solid var(--line);margin-bottom:24px;padding-bottom:12px;display:flex;flex-wrap:wrap;gap:8px 18px;align-items:baseline}
+header.site a.brand{font-weight:700;font-size:20px;color:var(--ink);text-decoration:none}
+header.site nav a{color:var(--mute);margin-right:14px;font-size:15px}
+a{color:var(--signal)}h1{font-size:28px;line-height:1.25;margin:0 0 10px}h2{font-size:20px;margin:30px 0 8px}
+.lead{font-size:19px;color:var(--mute)}.price{font-weight:700;color:var(--mint)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px 16px;margin:10px 0}
+.card h3{margin:0 0 4px;font-size:17px}.card p{margin:4px 0;font-size:15px}
+.btn{display:inline-block;background:var(--signal);color:#fff;padding:10px 16px;border-radius:5px;text-decoration:none;font-weight:700}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;font-size:14px;white-space:pre-wrap;word-break:break-word}
+code{font-family:Consolas,Menlo,monospace}
+.small{font-size:14px;color:var(--mute)}footer{border-top:1px solid var(--line);margin-top:40px;padding-top:12px;font-size:14px;color:var(--mute)}
+</style></head><body><div class="wrap">
+<header class="site"><a class="brand" href="../index.html">Small Numbers</a><nav><a href="../index.html#products">Products</a><a href="../index.html#guides">How-to guides</a><a href="https://smallnumbers.gumroad.com">Store</a></nav></header>
+<p class="small"><a href="../index.html#guides">How-to guides</a></p>
+<h1>How to work out revenue per 1,000 subscribers and a sent-weighted open rate for your newsletter</h1>
+<p>Two numbers tell you more about a newsletter than a raw subscriber count: how much each month earns for every 1,000 people on your list, and what share of the people you actually sent to opened. Both are easy to get slightly wrong in a spreadsheet. Here is how to work them out, with a worked example you can copy.</p>
+<h2>Revenue per 1,000 subscribers, for one month</h2>
+<p>Add up everything the newsletter earned in the month: paid subscriptions, sponsor fees and anything else you count, such as a product sale. Then divide by the number of subscribers and multiply by 1,000.</p>
+<p>The catch is which subscriber number to use. Your list grows during the month, so dividing by the month-end figure makes every month look a little worse than it was. Use the average of the start and the end of the month instead.</p>
+<p>Worked example. You start September with 4,000 subscribers and end it with 4,400. You earn $600 from paid subscriptions and $300 from one sponsor, $900 in all.</p>
+<ul>
+<li>Average subscribers: (4,000 + 4,400) ÷ 2 = 4,200</li>
+<li>Revenue per 1,000: $900 ÷ 4,200 × 1,000 = $214.29</li>
+</ul>
+<p>Dividing by the month-end 4,400 instead would give $204.55, about $10 lower, only because the list grew. Pick one method and keep it every month, so the trend means something. If you do not know the start figure for a month, leave that month blank rather than guessing.</p>
+<h2>A sent-weighted open rate</h2>
+<p>Most platforms show an open rate for each issue. The tempting shortcut is to average those percentages. That gives a small send the same weight as a send to your whole list, and a paid-only issue to 220 loyal readers can drag the average a long way.</p>
+<p>Worked example. Three issues in a month:</p>
+<ul>
+<li>Issue A, free: sent to 4,300, 2,064 unique opens (48.0%)</li>
+<li>Issue B, paid-only: sent to 220, 176 unique opens (80.0%)</li>
+<li>Issue C, free: sent to 4,380, 1,971 unique opens (45.0%)</li>
+</ul>
+<p>The simple average of 48.0%, 80.0% and 45.0% is 57.7%. But only 4,211 of the 8,900 emails you sent were opened, so the sent-weighted open rate is 4,211 ÷ 8,900 = 47.3%. That is the number that describes your list. The same method works for click rate: total unique clicks ÷ total sent.</p>
+<p>Two habits keep the number honest. Use unique opens, not total opens, so one reader opening an issue five times counts once. And treat open rate as a trend against your own past months, not against someone else's figure: many platforms count opens triggered by Apple Mail Privacy Protection, which can push open rates up without anyone reading. Clicks are harder to inflate, so watch them alongside.</p>
+<h2>Doing it in a spreadsheet</h2>
+<p>Keep one row per issue (date, sent, unique opens, unique clicks, and whether it went to free or paid readers) and one row per month for subscribers and revenue. Sum opens and sent over the period you want, then divide; never average the per-issue percentages.</p>
+<p>If you would rather not build it yourself, the Newsletter Dashboard ($12) does both calculations, plus net growth against a target, paid share and paid churn, and sponsor fill rate, from the numbers you copy in from Substack, Beehiiv, Kit or any email platform. It is not affiliated with any of them: <a href="https://smallnumbers.gumroad.com/l/newsletter-dashboard">Newsletter Dashboard</a></p>
+<p>Setting sponsor prices? The Free Sponsorship Rate Calculator works out a starting rate from your audience numbers: <a href="https://smallnumbers.gumroad.com/l/free-sponsorship-rate-calculator">Free Sponsorship Rate Calculator</a></p>
+<footer>Small Numbers: plain tools for one-person businesses. Every product is sold and delivered through the <a href="https://smallnumbers.gumroad.com">Small Numbers store on Gumroad</a>.</footer>
+</div></body></html>

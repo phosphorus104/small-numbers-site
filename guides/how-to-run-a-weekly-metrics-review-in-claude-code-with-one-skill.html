@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to run a weekly metrics review in Claude Code with one skill | Small Numbers</title><meta name="description" content="Most solo founders know their MRR. Fewer know, on a Monday morning, whether last period was on plan, what got worse, and what to do about it this week.…"><link rel="canonical" href="https://phosphorus104.github.io/small-numbers-site/guides/how-to-run-a-weekly-metrics-review-in-claude-code-with-one-skill.html">
+<style>
+:root{--ink:#1B2432;--paper:#F5F1EA;--signal:#B85F1E;--mint:#2A9D8F;--mute:#5E636B;--card:#FFFFFF;--line:#E2DCD1}
+@media (prefers-color-scheme:dark){:root{--ink:#EDE8DF;--paper:#151B25;--signal:#E99A5C;--mint:#5CC2B5;--mute:#9AA0A8;--card:#1F2733;--line:#2E3846}}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 Arial,Helvetica,sans-serif}
+.wrap{max-width:820px;margin:0 auto;padding:24px 16px 48px}
+header.site{border-bottom:1px solid var(--line);margin-bottom:24px;padding-bottom:12px;display:flex;flex-wrap:wrap;gap:8px 18px;align-items:baseline}
+header.site a.brand{font-weight:700;font-size:20px;color:var(--ink);text-decoration:none}
+header.site nav a{color:var(--mute);margin-right:14px;font-size:15px}
+a{color:var(--signal)}h1{font-size:28px;line-height:1.25;margin:0 0 10px}h2{font-size:20px;margin:30px 0 8px}
+.lead{font-size:19px;color:var(--mute)}.price{font-weight:700;color:var(--mint)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px 16px;margin:10px 0}
+.card h3{margin:0 0 4px;font-size:17px}.card p{margin:4px 0;font-size:15px}
+.btn{display:inline-block;background:var(--signal);color:#fff;padding:10px 16px;border-radius:5px;text-decoration:none;font-weight:700}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;font-size:14px;white-space:pre-wrap;word-break:break-word}
+code{font-family:Consolas,Menlo,monospace}
+.small{font-size:14px;color:var(--mute)}footer{border-top:1px solid var(--line);margin-top:40px;padding-top:12px;font-size:14px;color:var(--mute)}
+</style></head><body><div class="wrap">
+<header class="site"><a class="brand" href="../index.html">Small Numbers</a><nav><a href="../index.html#products">Products</a><a href="../index.html#guides">How-to guides</a><a href="https://smallnumbers.gumroad.com">Store</a></nav></header>
+<p class="small"><a href="../index.html#guides">How-to guides</a></p>
+<h1>How to run a weekly metrics review in Claude Code with one skill</h1>
+<p>Most solo founders know their MRR. Fewer know, on a Monday morning, whether last period was on plan, what got worse, and what to do about it this week. The numbers sit in a Stripe export; the review never gets written. Here is how to make Claude Code write it for you in under a minute, from a CSV you already have.</p>
+<h2>What the review needs</h2>
+<p>One row per period with ten columns: period, new customers, churned customers, new MRR, expansion MRR, contraction MRR, churned MRR, sales and marketing spend, total expenses and cash at period end. If your export has no MRR-at-start column, you also need two starting values: MRR and paying customers at the end of the period before the first row. Every later row chains from them.</p>
+<h2>The method, in plain formulas</h2>
+<ul>
+<li>MRR end = MRR start + new + expansion − contraction − churned.</li>
+<li>Net MRR churn = (contraction + churned − expansion) ÷ MRR start. Negative is good.</li>
+<li>Quick ratio = (new + expansion) ÷ (contraction + churned).</li>
+<li>CAC = sales and marketing spend ÷ new customers.</li>
+<li>Net burn = total expenses − MRR end. Runway = cash ÷ net burn.</li>
+</ul>
+<p>Two rules keep the review honest. First, a denominator of zero is written as "not computable", never as a number. Second, small moves are written as "flat": a percentage that moved less than half a point, or any other metric that moved less than 2%, so the review does not dramatize noise.</p>
+<h2>A worked example</h2>
+<p>Take a product that ended May at 21,390 MRR with 91 customers. In September it added 3,900 new MRR and 1,150 expansion, and lost 210 to contraction and 1,050 to churn. MRR ends at 34,120, up 12.5%; August's growth was 12.1%, a 0.4-point move, so growth is flat. Net MRR churn is 0.4%, quick ratio 4.0, CAC 341, and runway 51.4 months against a 9-month alarm. The flags write themselves from the data: churned MRR rose for a second month while churned customers held at four, so the people leaving are slightly larger than average; spend has risen every month, and CAC fell only because sign-ups rose faster.</p>
+<h2>Turning it into a skill</h2>
+<p>In Claude Code, a skill is a folder under .claude/skills/ holding one Markdown file of instructions: the inputs, the formulas, the rules above, an output template and a checklist. Put your gross margin, target MRR, runway alarm and starting values in your project's memory file, the one Claude Code reads at the start of every session, and the skill reads them every time. Then type /weekly-metrics-review data/metrics.csv on Monday. You get a one-page Markdown review: a two-sentence headline, a table of twelve metrics against the previous period, three flags and three actions you can finish this week, with every formula defined at the end. Missing values become an "Assumption" line at the top instead of a silent default.</p>
+<h2>Get it</h2>
+<p>The weekly metrics review and release-notes skills are free, MIT-licensed, on GitHub: <a href="https://github.com/phosphorus104/founder-ops-skills-lite">github.com/phosphorus104/founder-ops-skills-lite</a>. The full kit adds support replies, pricing-page tests, incident write-ups and cancellation feedback, each with a worked example, plus a project-memory template: <a href="https://smallnumbers.gumroad.com/l/founder-ops-skills-claude-code">Founder Ops Skills for Claude Code</a></p>
+<p>Independent product written for use with Claude Code; not affiliated with, sponsored by or endorsed by Anthropic.</p>
+<footer>Small Numbers: plain tools for one-person businesses. Every product is sold and delivered through the <a href="https://smallnumbers.gumroad.com">Small Numbers store on Gumroad</a>.</footer>
+</div></body></html>

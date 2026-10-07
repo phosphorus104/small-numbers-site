@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to work out net MRR churn and quick ratio in a spreadsheet | Small Numbers</title><meta name="description" content="Two numbers tell you more about a small subscription business than total MRR does: net MRR churn and the quick ratio. Both come from five figures you…"><link rel="canonical" href="https://phosphorus104.github.io/small-numbers-site/guides/how-to-work-out-net-mrr-churn-and-quick-ratio-in-a-spreadsheet.html">
+<style>
+:root{--ink:#1B2432;--paper:#F5F1EA;--signal:#B85F1E;--mint:#2A9D8F;--mute:#5E636B;--card:#FFFFFF;--line:#E2DCD1}
+@media (prefers-color-scheme:dark){:root{--ink:#EDE8DF;--paper:#151B25;--signal:#E99A5C;--mint:#5CC2B5;--mute:#9AA0A8;--card:#1F2733;--line:#2E3846}}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 Arial,Helvetica,sans-serif}
+.wrap{max-width:820px;margin:0 auto;padding:24px 16px 48px}
+header.site{border-bottom:1px solid var(--line);margin-bottom:24px;padding-bottom:12px;display:flex;flex-wrap:wrap;gap:8px 18px;align-items:baseline}
+header.site a.brand{font-weight:700;font-size:20px;color:var(--ink);text-decoration:none}
+header.site nav a{color:var(--mute);margin-right:14px;font-size:15px}
+a{color:var(--signal)}h1{font-size:28px;line-height:1.25;margin:0 0 10px}h2{font-size:20px;margin:30px 0 8px}
+.lead{font-size:19px;color:var(--mute)}.price{font-weight:700;color:var(--mint)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px 16px;margin:10px 0}
+.card h3{margin:0 0 4px;font-size:17px}.card p{margin:4px 0;font-size:15px}
+.btn{display:inline-block;background:var(--signal);color:#fff;padding:10px 16px;border-radius:5px;text-decoration:none;font-weight:700}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;font-size:14px;white-space:pre-wrap;word-break:break-word}
+code{font-family:Consolas,Menlo,monospace}
+.small{font-size:14px;color:var(--mute)}footer{border-top:1px solid var(--line);margin-top:40px;padding-top:12px;font-size:14px;color:var(--mute)}
+</style></head><body><div class="wrap">
+<header class="site"><a class="brand" href="../index.html">Small Numbers</a><nav><a href="../index.html#products">Products</a><a href="../index.html#guides">How-to guides</a><a href="https://smallnumbers.gumroad.com">Store</a></nav></header>
+<p class="small"><a href="../index.html#guides">How-to guides</a></p>
+<h1>How to work out net MRR churn and quick ratio in a spreadsheet</h1>
+<p>Two numbers tell you more about a small subscription business than total MRR does: net MRR churn and the quick ratio. Both come from five figures you can pull from your billing system each month. Here is how to set them up in a plain spreadsheet.</p>
+<h2>The five inputs</h2>
+<p>One row per month, with these columns:</p>
+<ul>
+<li>B: MRR at the start of the month</li>
+<li>C: New MRR (from customers who started paying this month)</li>
+<li>D: Expansion MRR (upgrades and added seats from existing customers)</li>
+<li>E: Contraction MRR (downgrades from customers who stayed)</li>
+<li>F: Churned MRR (customers who cancelled)</li>
+</ul>
+<p>Keep annual plans in monthly terms: a $1,200 a year plan is $100 of MRR.</p>
+<h2>The formulas</h2>
+<ul>
+<li>End of month MRR, G: =B2+C2+D2-E2-F2. Next month's start (B3) is this month's end: =G2.</li>
+<li>Gross MRR churn, H: =(E2+F2)/B2. Revenue lost from existing customers, before upgrades.</li>
+<li>Net MRR churn, I: =(E2+F2-D2)/B2. The same, after upgrades. A negative number means existing customers grew on their own.</li>
+<li>Quick ratio, J: =IF(E2+F2=0,"–",(C2+D2)/(E2+F2)). MRR added for every dollar lost.</li>
+<li>ARR: =G2*12.</li>
+</ul>
+<h2>A worked month</h2>
+<p>Start MRR 10,000. New 1,200, expansion 300, contraction 150, churned 400.</p>
+<ul>
+<li>End MRR: 10,000 + 1,200 + 300 − 150 − 400 = 10,950</li>
+<li>Gross MRR churn: (150 + 400) ÷ 10,000 = 5.5%</li>
+<li>Net MRR churn: (150 + 400 − 300) ÷ 10,000 = 2.5%</li>
+<li>Quick ratio: (1,200 + 300) ÷ (150 + 400) = 2.7</li>
+</ul>
+<p>Read them together. Net churn says how leaky the existing base is. The quick ratio says whether new and expansion revenue outruns the leak. A quick ratio of 1 means you are running to stand still.</p>
+<h2>Mistakes that skew the numbers</h2>
+<ul>
+<li>Dividing by end-of-month MRR. Churn is measured against what you started the month with.</li>
+<li>Counting a downgrade as a cancelled customer. It belongs in contraction, not churn.</li>
+<li>Letting the quick ratio divide by zero in a month with no losses. The IF above shows a dash instead.</li>
+<li>Mixing in one-off charges such as setup fees. MRR is recurring revenue only.</li>
+<li>Comparing single months. At small numbers one cancellation moves everything, so look at a three-month average too.</li>
+</ul>
+<h2>Get it ready-made</h2>
+<p>The free SaaS Metrics Dashboard Lite works out ARR, net MRR churn and quick ratio from your monthly numbers, in Excel or Google Sheets: <a href="https://smallnumbers.gumroad.com/l/saas-metrics-lite">Free SaaS Metrics Dashboard Lite</a></p>
+<p>The full SaaS Metrics Dashboard adds CAC, LTV and runway: <a href="https://smallnumbers.gumroad.com/l/saas-metrics-dashboard">SaaS Metrics Dashboard for Indie Founders</a></p>
+<footer>Small Numbers: plain tools for one-person businesses. Every product is sold and delivered through the <a href="https://smallnumbers.gumroad.com">Small Numbers store on Gumroad</a>.</footer>
+</div></body></html>

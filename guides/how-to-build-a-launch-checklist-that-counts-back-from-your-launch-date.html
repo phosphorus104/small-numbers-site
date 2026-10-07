@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to build a launch checklist that counts back from your launch date | Small Numbers</title><meta name="description" content="Most launch checklists are a list of tasks with no dates, so everything feels equally urgent until the week before. Give each task a number of days…"><link rel="canonical" href="https://phosphorus104.github.io/small-numbers-site/guides/how-to-build-a-launch-checklist-that-counts-back-from-your-launch-date.html">
+<style>
+:root{--ink:#1B2432;--paper:#F5F1EA;--signal:#B85F1E;--mint:#2A9D8F;--mute:#5E636B;--card:#FFFFFF;--line:#E2DCD1}
+@media (prefers-color-scheme:dark){:root{--ink:#EDE8DF;--paper:#151B25;--signal:#E99A5C;--mint:#5CC2B5;--mute:#9AA0A8;--card:#1F2733;--line:#2E3846}}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 Arial,Helvetica,sans-serif}
+.wrap{max-width:820px;margin:0 auto;padding:24px 16px 48px}
+header.site{border-bottom:1px solid var(--line);margin-bottom:24px;padding-bottom:12px;display:flex;flex-wrap:wrap;gap:8px 18px;align-items:baseline}
+header.site a.brand{font-weight:700;font-size:20px;color:var(--ink);text-decoration:none}
+header.site nav a{color:var(--mute);margin-right:14px;font-size:15px}
+a{color:var(--signal)}h1{font-size:28px;line-height:1.25;margin:0 0 10px}h2{font-size:20px;margin:30px 0 8px}
+.lead{font-size:19px;color:var(--mute)}.price{font-weight:700;color:var(--mint)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px 16px;margin:10px 0}
+.card h3{margin:0 0 4px;font-size:17px}.card p{margin:4px 0;font-size:15px}
+.btn{display:inline-block;background:var(--signal);color:#fff;padding:10px 16px;border-radius:5px;text-decoration:none;font-weight:700}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;font-size:14px;white-space:pre-wrap;word-break:break-word}
+code{font-family:Consolas,Menlo,monospace}
+.small{font-size:14px;color:var(--mute)}footer{border-top:1px solid var(--line);margin-top:40px;padding-top:12px;font-size:14px;color:var(--mute)}
+</style></head><body><div class="wrap">
+<header class="site"><a class="brand" href="../index.html">Small Numbers</a><nav><a href="../index.html#products">Products</a><a href="../index.html#guides">How-to guides</a><a href="https://smallnumbers.gumroad.com">Store</a></nav></header>
+<p class="small"><a href="../index.html#guides">How-to guides</a></p>
+<h1>How to build a launch checklist that counts back from your launch date</h1>
+<p>Most launch checklists are a list of tasks with no dates, so everything feels equally urgent until the week before. Give each task a number of days before launch instead, and the sheet works out every due date for you. Move the launch, and the whole plan moves with it.</p>
+<h2>The inputs</h2>
+<p>Put the launch date in one cell, say B1. Then one row per task:</p>
+<ul>
+<li>A: Task</li>
+<li>B: Phase (prepare, build up, launch week, after)</li>
+<li>C: Days before launch (30, 14, 7, 0 for launch day, negative for follow-ups)</li>
+<li>D: Owner</li>
+<li>E: Status (To do, Doing, Done, Skipped)</li>
+</ul>
+<h2>The formulas</h2>
+<p>Due date, F:</p>
+<pre><code>=$B$1-C2</code></pre>
+<p>Flag, G:</p>
+<pre><code>=IF(OR(E2=&quot;Done&quot;,E2=&quot;Skipped&quot;),&quot;&quot;,IF(F2&lt;TODAY(),&quot;Overdue&quot;,IF(F2-TODAY()&lt;=7,&quot;Due soon&quot;,&quot;&quot;)))</code></pre>
+<p>Countdown, in one cell at the top:</p>
+<pre><code>=B1-TODAY()</code></pre>
+<p>Sort or filter by due date and the next things to do are always at the top. A count of tasks by flag, =COUNTIF(G:G,"Overdue"), tells you at a glance whether the plan is slipping.</p>
+<h2>A worked example</h2>
+<p>Launch on 10 Nov; today is 20 Oct, so the countdown says 21.</p>
+<ul>
+<li>Book podcast and newsletter slots, 30 days before: due 11 Oct, still To do. Overdue by 9 days.</li>
+<li>Write the FAQ page, 25 days before: due 16 Oct, Done.</li>
+<li>Record the demo video, 21 days before: due today. Due soon.</li>
+<li>Write the launch email, 7 days before: due 3 Nov. Not flagged yet.</li>
+</ul>
+<p>One overdue task, and it is the one with the longest lead time, because other people's calendars fill up. That is the email to send this morning.</p>
+<h2>After launch day</h2>
+<p>Keep a small results table: one row per channel, with visits, sign-ups and sales. Sign-up rate is sign-ups ÷ visits. Say your newsletter sent 400 visits and 36 sign-ups (9%) and a social post sent 1,200 visits and 30 sign-ups (2.5%). The post brought more people; the newsletter brought more of the right ones. That is what to repeat next time.</p>
+<h2>Mistakes that make the plan useless</h2>
+<ul>
+<li>Typing due dates by hand. When the launch moves, every date is wrong, and nobody retypes fifty of them.</li>
+<li>Marking a skipped task as done. Keep Skipped separate, so you can see what you chose not to do.</li>
+<li>Leaving the owner blank. A task with no name on it is a task nobody does.</li>
+<li>Counting only total sign-ups. Without a channel on each number you cannot tell what worked.</li>
+</ul>
+<h2>Get it ready-made</h2>
+<p>The free Launch Countdown Checklist has 50 tasks dated back from your launch date, overdue and due-soon flags and progress by phase, in Excel or Google Sheets: <a href="https://smallnumbers.gumroad.com/l/free-launch-countdown-checklist">Free Product Launch Checklist</a></p>
+<p>The Product Launch Planner adds a launch-day runbook timed from your start time and a results tracker by channel: <a href="https://smallnumbers.gumroad.com/l/product-launch-planner">Product Launch Planner</a></p>
+<footer>Small Numbers: plain tools for one-person businesses. Every product is sold and delivered through the <a href="https://smallnumbers.gumroad.com">Small Numbers store on Gumroad</a>.</footer>
+</div></body></html>
