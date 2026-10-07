@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://phosphorus104.github.io/small-numbers-site/sitemap.xml
