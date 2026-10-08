@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>One Monday review for a one-person SaaS: metrics, release notes and the launch list | Small Numbers</title><meta name="description" content="When you run a subscription product alone, Monday is when three loose ends meet: last month&#x27;s numbers, what you shipped last week, and what is due…"><link rel="canonical" href="https://phosphorus104.github.io/small-numbers-site/guides/one-monday-review-for-a-one-person-saas.html">
+<style>
+:root{--ink:#1B2432;--paper:#F5F1EA;--signal:#B85F1E;--mint:#2A9D8F;--mute:#5E636B;--card:#FFFFFF;--line:#E2DCD1}
+@media (prefers-color-scheme:dark){:root{--ink:#EDE8DF;--paper:#151B25;--signal:#E99A5C;--mint:#5CC2B5;--mute:#9AA0A8;--card:#1F2733;--line:#2E3846}}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 Arial,Helvetica,sans-serif}
+.wrap{max-width:820px;margin:0 auto;padding:24px 16px 48px}
+header.site{border-bottom:1px solid var(--line);margin-bottom:24px;padding-bottom:12px;display:flex;flex-wrap:wrap;gap:8px 18px;align-items:baseline}
+header.site a.brand{font-weight:700;font-size:20px;color:var(--ink);text-decoration:none}
+header.site nav a{color:var(--mute);margin-right:14px;font-size:15px}
+a{color:var(--signal)}h1{font-size:28px;line-height:1.25;margin:0 0 10px}h2{font-size:20px;margin:30px 0 8px}
+.lead{font-size:19px;color:var(--mute)}.price{font-weight:700;color:var(--mint)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px 16px;margin:10px 0}
+.card h3{margin:0 0 4px;font-size:17px}.card p{margin:4px 0;font-size:15px}
+.btn{display:inline-block;background:var(--signal);color:#fff;padding:10px 16px;border-radius:5px;text-decoration:none;font-weight:700}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;font-size:14px;white-space:pre-wrap;word-break:break-word}
+code{font-family:Consolas,Menlo,monospace}
+.small{font-size:14px;color:var(--mute)}footer{border-top:1px solid var(--line);margin-top:40px;padding-top:12px;font-size:14px;color:var(--mute)}
+</style></head><body><div class="wrap">
+<header class="site"><a class="brand" href="../index.html">Small Numbers</a><nav><a href="../index.html#products">Products</a><a href="../index.html#guides">How-to guides</a><a href="https://smallnumbers.gumroad.com">Store</a></nav></header>
+<p class="small"><a href="../index.html#guides">How-to guides</a></p>
+<h1>One Monday review for a one-person SaaS: metrics, release notes and the launch list</h1>
+<p>When you run a subscription product alone, Monday is when three loose ends meet: last month's numbers, what you shipped last week, and what is due before the next launch. Kept in three places, each gets skipped in turn. Here is a 30-minute routine that looks at all three in one sitting, with a worked example.</p>
+<h2>1. The numbers (10 minutes)</h2>
+<p>Keep one row per month with nine inputs: new and churned customers; new, expansion, contraction and churned MRR; sales and marketing spend; total expenses; and cash at month end. On the first Monday of a month, add last month's row. On the other Mondays, read the same figures and ask what changed.</p>
+<ul>
+<li>MRR end = MRR start + new + expansion − contraction − churned</li>
+<li>Net MRR churn = (contraction + churned − expansion) ÷ MRR start</li>
+<li>Quick ratio = (new + expansion) ÷ (contraction + churned)</li>
+<li>CAC = sales and marketing spend ÷ new customers</li>
+<li>Runway = cash ÷ (total expenses − MRR end)</li>
+</ul>
+<p>Worked example: September starts at 8,400 MRR. New 900, expansion 200, contraction 100, churned 350; 6 new customers; spend 1,500; expenses 11,500; cash 60,000.</p>
+<ul>
+<li>MRR end: 8,400 + 900 + 200 − 100 − 350 = 9,050, up 7.7%; ARR 108,600</li>
+<li>Net MRR churn: (100 + 350 − 200) ÷ 8,400 = 3.0%</li>
+<li>Quick ratio: 1,100 ÷ 450 = 2.4</li>
+<li>CAC: 1,500 ÷ 6 = 250</li>
+<li>Runway: 60,000 ÷ (11,500 − 9,050) = 24.5 months</li>
+</ul>
+<p>Write down one flag and one action. Here: churned MRR (350) is larger than expansion (200), so existing customers shrink the base before any new sale. The action is to read the cancellation reasons this week.</p>
+<h2>2. What shipped (10 minutes)</h2>
+<p>List the changes since your last tag and sort them by what a customer would notice: new, improved, fixed. Note anything that needs a migration or a heads-up to existing users. Then write one short paragraph for the changelog and one line of 280 characters or less for an announcement. If the list is empty, that is a finding too: the numbers above came from work done earlier.</p>
+<h2>3. What is due (10 minutes)</h2>
+<p>Count the launch list back from the launch date. With a launch on Monday 26 October, a task set 14 days out is due on Monday 12 October and one set 7 days out on Monday 19 October. Sort by due date, mark anything overdue, and pick the three tasks you will finish before next Monday.</p>
+<h2>The review on one page</h2>
+<p>Headline (two sentences), the numbers with last month beside them, one flag, what shipped, and the three tasks due. That page is the whole review; file it with the date so next Monday starts from it.</p>
+<h2>Get it ready-made</h2>
+<ul>
+<li>The free SaaS Metrics Dashboard Lite works out MRR, ARR, net MRR churn and quick ratio from your monthly rows: <a href="https://smallnumbers.gumroad.com/l/saas-metrics-lite">Free SaaS Metrics Dashboard Lite</a></li>
+<li>The full dashboard adds CAC, LTV, payback, runway and a what-if block: <a href="https://smallnumbers.gumroad.com/l/saas-metrics-dashboard">SaaS Metrics Dashboard for Indie Founders</a></li>
+<li>For Claude Code users, the weekly metrics review and release-notes skills are free on GitHub: <a href="https://github.com/phosphorus104/founder-ops-skills-lite">github.com/phosphorus104/founder-ops-skills-lite</a>. The full kit adds four more skills: <a href="https://smallnumbers.gumroad.com/l/founder-ops-skills-claude-code">Founder Ops Skills for Claude Code</a></li>
+<li>The launch planner dates 50 tasks back from your launch date and runs launch day from a timed runbook: <a href="https://smallnumbers.gumroad.com/l/product-launch-planner">Product Launch Planner</a></li>
+<li>All three paid tools together, $34 instead of $52: <a href="https://smallnumbers.gumroad.com/l/indie-saas-founder-bundle">Indie SaaS Founder Bundle</a></li>
+</ul>
+<p>Independent products. The skills are written for use with Claude Code; not affiliated with, sponsored by or endorsed by Anthropic.</p>
+<footer>Small Numbers: plain tools for one-person businesses. Every product is sold and delivered through the <a href="https://smallnumbers.gumroad.com">Small Numbers store on Gumroad</a>.</footer>
+</div></body></html>
