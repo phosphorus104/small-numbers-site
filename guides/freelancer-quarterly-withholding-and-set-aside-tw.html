@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>接案者每季對一次帳：被代扣多少、預留帳戶夠不夠，用試算表三個加總看清楚 | Small Numbers</title><meta name="description" content="接案的收入不是每個月一樣，客戶匯進來的錢又常常先被扣掉一部分。等到年底拿到扣繳憑單、要準備報稅時才回頭翻，常會發現兩件事：不記得哪些錢被扣過，預留帳戶裡的錢也不"><link rel="canonical" href="https://phosphorus104.github.io/small-numbers-site/guides/freelancer-quarterly-withholding-and-set-aside-tw.html">
+<style>
+:root{--ink:#1B2432;--paper:#F5F1EA;--signal:#B85F1E;--mint:#2A9D8F;--mute:#5E636B;--card:#FFFFFF;--line:#E2DCD1}
+@media (prefers-color-scheme:dark){:root{--ink:#EDE8DF;--paper:#151B25;--signal:#E99A5C;--mint:#5CC2B5;--mute:#9AA0A8;--card:#1F2733;--line:#2E3846}}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 Arial,Helvetica,sans-serif}
+.wrap{max-width:820px;margin:0 auto;padding:24px 16px 48px}
+header.site{border-bottom:1px solid var(--line);margin-bottom:24px;padding-bottom:12px;display:flex;flex-wrap:wrap;gap:8px 18px;align-items:baseline}
+header.site a.brand{font-weight:700;font-size:20px;color:var(--ink);text-decoration:none}
+header.site nav a{color:var(--mute);margin-right:14px;font-size:15px}
+a{color:var(--signal)}h1{font-size:28px;line-height:1.25;margin:0 0 10px}h2{font-size:20px;margin:30px 0 8px}
+.lead{font-size:19px;color:var(--mute)}.price{font-weight:700;color:var(--mint)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px 16px;margin:10px 0}
+.card h3{margin:0 0 4px;font-size:17px}.card p{margin:4px 0;font-size:15px}
+.btn{display:inline-block;background:var(--signal);color:#fff;padding:10px 16px;border-radius:5px;text-decoration:none;font-weight:700}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;font-size:14px;white-space:pre-wrap;word-break:break-word}
+code{font-family:Consolas,Menlo,monospace}
+.small{font-size:14px;color:var(--mute)}footer{border-top:1px solid var(--line);margin-top:40px;padding-top:12px;font-size:14px;color:var(--mute)}
+</style></head><body><div class="wrap">
+<header class="site"><a class="brand" href="../index.html">Small Numbers</a><nav><a href="../index.html#products">Products</a><a href="../index.html#guides">How-to guides</a><a href="https://smallnumbers.gumroad.com">Store</a></nav></header>
+<p class="small"><a href="../index.html#guides">How-to guides</a></p>
+<h1>接案者每季對一次帳：被代扣多少、預留帳戶夠不夠，用試算表三個加總看清楚</h1>
+<p>接案的收入不是每個月一樣，客戶匯進來的錢又常常先被扣掉一部分。等到年底拿到扣繳憑單、要準備報稅時才回頭翻，常會發現兩件事：不記得哪些錢被扣過，預留帳戶裡的錢也不夠。其實每季花十分鐘、做三個加總，就能提早看清楚。</p>
+<h2>一、每季要回答的三個問題</h2>
+<ul>
+<li>這一季實際進帳多少？客戶先代扣了多少？</li>
+<li>依扣繳憑單上的所得類別，各類別的給付總額和被代扣各是多少？</li>
+<li>照我自己訂的比例，這一季該存進預留帳戶多少？已經存了多少、還差多少？</li>
+</ul>
+<h2>二、代扣：照收款日歸季，不是請款日</h2>
+<p>每張請款單記一列：請款金額、代扣金額、已收日。代扣金額照匯款明細或扣繳憑單上的數字填，客戶同時扣了扣繳稅款和二代健保補充保費，就把兩項合計填在同一欄；不要自己估，也不要拿請款金額去推算。</p>
+<p>加一欄收款月份 =MONTH(已收日)，第三季（7 到 9 月）的數字就是：</p>
+<ul>
+<li>實收：SUMIFS(實收, 收款月, "&gt;=7", 收款月, "&lt;=9")</li>
+<li>被代扣：SUMIFS(代扣金額, 收款月, "&gt;=7", 收款月, "&lt;=9")</li>
+<li>給付總額＝實收＋被代扣</li>
+</ul>
+<p>再多加一個「所得類別」條件，就能分類別加總。用收款日而不是請款日，是因為扣繳憑單是以實際付款的那一年計；8 月開的請款單如果 10 月 1 日才收到，它就算在第四季。</p>
+<h2>三、預留：用自己的比例，從淨額算</h2>
+<p>預留比例沒有標準答案，要留多少給稅金、勞健保或淡季，請依自己的狀況決定，不確定就問會計師或記帳士。表格只負責算：</p>
+<ul>
+<li>每月淨額＝當月實收－當月支出</li>
+<li>應預留＝淨額 × 你的比例（淨額是負的就算 0）</li>
+<li>尚待預留＝應預留累計－已轉入預留帳戶的累計</li>
+</ul>
+<h2>四、算一次範例</h2>
+<p>一人設計工作室，預留比例 15%，第三季收到四筆款：</p>
+<ul>
+<li>7/31 光點科技 6 月顧問費，請款 45,000，代扣 5,450，實收 39,550（執行業務所得）。</li>
+<li>8/14 木棉出版社書封，請款 18,000，沒有代扣（稿費版稅）。</li>
+<li>8/31 光點科技 7 月顧問費，同樣實收 39,550。</li>
+<li>9/18 青田咖啡菜單設計，請款 30,000，代扣 3,000，實收 27,000（勞務報酬）。</li>
+</ul>
+<p>光點科技 8 月的顧問費 10 月 1 日才入帳，不算在這一季。</p>
+<p>第三季實收 124,100 元、被代扣 13,900 元，給付總額 138,000 元。分類別：執行業務所得給付 90,000、被代扣 10,900；勞務報酬 30,000、被代扣 3,000；稿費版稅 18,000、沒有代扣。</p>
+<p>支出 7 月 22,000、8 月 19,500、9 月 21,000。每月淨額 17,550、38,050、6,000，應預留 2,633、5,708、900，合計 9,241 元。7、8 月各轉了 3,000 元，9 月沒轉，已轉 6,000 元，這一季還差 3,241 元。</p>
+<h2>五、兩個常見的錯</h2>
+<ul>
+<li>只看存摺入帳。入帳金額已經扣掉代扣，只看存摺會低估收入，年底和扣繳憑單對不起來。</li>
+<li>等年底再一次補預留。8 月收入多，當月就該多轉；拖到年底，錢多半已經花掉了。</li>
+</ul>
+<h2>不想自己做？</h2>
+<p><a href="https://smallnumbers.gumroad.com/l/freelancer-invoice-tracker-tw">自由工作者記帳與請款表</a>（NT$390）的總覽會直接顯示本年被代扣、依所得類別（標籤）的給付總額與被代扣、尚待預留和現金可撐月數；每月現金分頁逐月算出應預留，你只要填轉了多少。只做記錄、加總與提醒，不含稅務計算。</p>
+<p>月結到期日和逾期帳齡怎麼算，可以看上一篇教學：<a href="https://phosphorus104.github.io/small-numbers-site/guides/freelancer-invoice-due-dates-and-ageing-tw.html">接案請款怎麼追：月結到期日、逾期天數與帳齡</a>。</p>
+<footer>Small Numbers: plain tools for one-person businesses. Every product is sold and delivered through the <a href="https://smallnumbers.gumroad.com">Small Numbers store on Gumroad</a>.</footer>
+</div></body></html>
