@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to work out CAC, LTV and CAC payback for a small SaaS in a spreadsheet | Small Numbers</title><meta name="description" content="Once a subscription product has a few dozen paying customers, the question changes from &quot;is anyone paying?&quot; to &quot;is each customer worth what it costs to…"><link rel="canonical" href="https://phosphorus104.github.io/small-numbers-site/guides/how-to-work-out-cac-ltv-and-cac-payback-for-a-small-saas.html">
+<style>
+:root{--ink:#1B2432;--paper:#F5F1EA;--signal:#B85F1E;--mint:#2A9D8F;--mute:#5E636B;--card:#FFFFFF;--line:#E2DCD1}
+@media (prefers-color-scheme:dark){:root{--ink:#EDE8DF;--paper:#151B25;--signal:#E99A5C;--mint:#5CC2B5;--mute:#9AA0A8;--card:#1F2733;--line:#2E3846}}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 Arial,Helvetica,sans-serif}
+.wrap{max-width:820px;margin:0 auto;padding:24px 16px 48px}
+header.site{border-bottom:1px solid var(--line);margin-bottom:24px;padding-bottom:12px;display:flex;flex-wrap:wrap;gap:8px 18px;align-items:baseline}
+header.site a.brand{font-weight:700;font-size:20px;color:var(--ink);text-decoration:none}
+header.site nav a{color:var(--mute);margin-right:14px;font-size:15px}
+a{color:var(--signal)}h1{font-size:28px;line-height:1.25;margin:0 0 10px}h2{font-size:20px;margin:30px 0 8px}
+.lead{font-size:19px;color:var(--mute)}.price{font-weight:700;color:var(--mint)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px 16px;margin:10px 0}
+.card h3{margin:0 0 4px;font-size:17px}.card p{margin:4px 0;font-size:15px}
+.btn{display:inline-block;background:var(--signal);color:#fff;padding:10px 16px;border-radius:5px;text-decoration:none;font-weight:700}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;font-size:14px;white-space:pre-wrap;word-break:break-word}
+code{font-family:Consolas,Menlo,monospace}
+.small{font-size:14px;color:var(--mute)}footer{border-top:1px solid var(--line);margin-top:40px;padding-top:12px;font-size:14px;color:var(--mute)}
+</style></head><body><div class="wrap">
+<header class="site"><a class="brand" href="../index.html">Small Numbers</a><nav><a href="../index.html#products">Products</a><a href="../index.html#guides">How-to guides</a><a href="https://smallnumbers.gumroad.com">Store</a></nav></header>
+<p class="small"><a href="../index.html#guides">How-to guides</a></p>
+<h1>How to work out CAC, LTV and CAC payback for a small SaaS in a spreadsheet</h1>
+<p>Once a subscription product has a few dozen paying customers, the question changes from "is anyone paying?" to "is each customer worth what it costs to get them?" Three numbers answer it: customer acquisition cost (CAC), lifetime value (LTV) and CAC payback. All three come from figures you already have each month.</p>
+<h2>The inputs</h2>
+<p>One row per month:</p>
+<ul>
+<li>New customers who started paying this month</li>
+<li>Customers who cancelled this month</li>
+<li>Customers at the start of the month</li>
+<li>MRR at the end of the month</li>
+<li>Sales and marketing spend: ads, sponsorships, tools, contractors, and a fair share of your own time if you pay yourself for it</li>
+</ul>
+<p>And one setting: gross margin, the share of revenue left after hosting, payment fees and support. Most small SaaS products sit between 70% and 90%.</p>
+<h2>The formulas</h2>
+<ul>
+<li>Customers at month end: start + new − cancelled</li>
+<li>ARPA (average revenue per account): MRR at month end ÷ customers at month end</li>
+<li>CAC: sales and marketing spend ÷ new customers. If there were no new customers, show a dash rather than dividing by zero.</li>
+<li>Customer churn: cancelled ÷ customers at the start of the month</li>
+<li>Expected lifetime in months: 1 ÷ customer churn. In a month with no cancellations, use a cap (say 60 months) so LTV does not run off to infinity.</li>
+<li>LTV: ARPA × gross margin × expected lifetime</li>
+<li>LTV : CAC: LTV ÷ CAC</li>
+<li>CAC payback in months: CAC ÷ (ARPA × gross margin)</li>
+</ul>
+<h2>A worked month</h2>
+<p>50 customers at the start, 6 new, 2 cancelled. MRR at month end 10,800. Sales and marketing spend 3,000. Gross margin 80%.</p>
+<ul>
+<li>Customers at month end: 50 + 6 − 2 = 54</li>
+<li>ARPA: 10,800 ÷ 54 = 200</li>
+<li>CAC: 3,000 ÷ 6 = 500</li>
+<li>Customer churn: 2 ÷ 50 = 4%, so expected lifetime is 1 ÷ 0.04 = 25 months</li>
+<li>Margin per customer per month: 200 × 0.8 = 160</li>
+<li>LTV: 160 × 25 = 4,000</li>
+<li>LTV : CAC: 4,000 ÷ 500 = 8.0</li>
+<li>CAC payback: 500 ÷ 160 = 3.1 months</li>
+</ul>
+<p>A common rule of thumb is an LTV : CAC of at least 3 and a payback under 12 months. Payback is the one to watch when cash is tight: it says how long each new customer keeps you out of pocket.</p>
+<h2>Mistakes that skew the numbers</h2>
+<ul>
+<li>Using revenue instead of margin. LTV and payback built on full ARPA flatter you by the size of your costs.</li>
+<li>Counting only paid ads in CAC. Sponsorships, tools and freelance help to win customers belong there too.</li>
+<li>Using MRR churn for lifetime. Lifetime is about how long customers stay, so it uses customer churn.</li>
+<li>Reading one month alone. With six new customers, one more or one fewer moves CAC by 15 to 20%. Add up three months of spend and new customers and divide those totals as well.</li>
+<li>Forgetting the cap. One quiet month with no cancellations would otherwise show an endless LTV.</li>
+</ul>
+<h2>Get it ready-made</h2>
+<p>The free SaaS Metrics Dashboard Lite tracks MRR, ARR, net MRR churn and quick ratio month by month, in Excel or Google Sheets: <a href="https://smallnumbers.gumroad.com/l/saas-metrics-lite">Free SaaS Metrics Dashboard Lite</a></p>
+<p>The full SaaS Metrics Dashboard adds CAC, LTV, LTV : CAC, CAC payback and runway for every month, with the lifetime cap and gross margin set once in Settings: <a href="https://smallnumbers.gumroad.com/l/saas-metrics-dashboard">SaaS Metrics Dashboard for Indie Founders</a></p>
+<footer>Small Numbers: plain tools for one-person businesses. Every product is sold and delivered through the <a href="https://smallnumbers.gumroad.com">Small Numbers store on Gumroad</a>.</footer>
+</div></body></html>
